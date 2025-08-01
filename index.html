@@ -2,7 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     * {
-        overflow: hidden;
         margin: 0;
         padding: 0;
     }
@@ -14,11 +13,6 @@
         align-items: center;
         justify-content: center;
         background: #101010;
-    }
-    iframe {
-        width: 100vw;
-        height: 100vh;
-        border: none;
     }
     .loader {
       cursor: pointer;
@@ -58,15 +52,15 @@
 
   const userCodeId = localStorage.getItem("h_local");
 
-  fetch("https://script.google.com/macros/s/AKfycbxchFI1MJyprYzlEksJVwydPzPU8D3PNuf4t85khPm1pzt4emCpUnKZiHE36tNtVRbp/exec")
+  fetch("https://script.google.com/macros/s/AKfycbxkD7u2FeKg3knRgXpBrv-YEv43z6RccK7wQCyASd1aP7bUKI41kJ8FycjeAbiRb9Aj/exec")
     .then(res => res.json())
     .then(data => {
       const output = document.getElementById("output");
       data.forEach(row => {
         if (row[2] === userCodeId) {
-          const iframe = document.createElement("iframe");
-          iframe.srcdoc = row[1];
-          output.appendChild(iframe);
+          const container = document.createElement("div");
+          container.innerHTML = row[1];
+          output.appendChild(container);
         }
       });
       document.getElementById("loader").style.display = "none";
